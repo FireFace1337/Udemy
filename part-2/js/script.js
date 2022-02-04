@@ -18,6 +18,15 @@ P.S. Здесь есть несколько вариантов решения з
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+    const addEventListenerOnMovieList = () => {
+        document.querySelectorAll('.delete').forEach((btn, i) => {
+            btn.addEventListener('click', () => {
+                btn.parentElement.remove();
+                movieDB.movies.splice(i, 1);
+            });
+        });
+    };
+    addEventListenerOnMovieList();
 
     const movieDB = {
         movies: [
@@ -81,14 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </li>
             `;
         });
+        addEventListenerOnMovieList();
     }
 
-    document.querySelectorAll('.delete').forEach((btn, i) => {
-        btn.addEventListener('click', () => {
-        btn.parentElement.remove();
-        movieDB.movies.splice(i, 1);
-        });
-    });
+
 
 
 

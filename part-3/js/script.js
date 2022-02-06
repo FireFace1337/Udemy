@@ -37,6 +37,9 @@ tabsParent.addEventListener('click', (event) => {
 
 // timer 
 
+// console.log(Date.parse(new Date ()));
+// console.log(new Date());
+
 const deadLine = '2022-02-09';
 
     function getTimeRemaining(endTime) {
@@ -90,3 +93,23 @@ const deadLine = '2022-02-09';
     }
 
     setClock('.timer', deadLine);
+
+
+    // modal
+
+
+let modalTrigger = document.querySelectorAll('[data-modal]');
+let modal = document.querySelector('.modal');
+let modalCloseBtn = document.querySelector('[data-close]');
+
+modalTrigger.forEach(btn => {
+    btn.addEventListener('click', function() {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+    });
+});
+
+modalCloseBtn.addEventListener('click', function() {
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+});

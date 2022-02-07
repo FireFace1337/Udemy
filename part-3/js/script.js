@@ -113,3 +113,14 @@ modalCloseBtn.addEventListener('click', function() {
         modal.classList.remove('show');
         modal.classList.add('hide');
 });
+
+
+function showModalByScroll() {
+    if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+        modal.classList.add('show');
+        modal.classList.remove('hide');
+        window.removeEventListener('scroll', showModalByScroll);
+    }
+}
+
+window.addEventListener('scroll', showModalByScroll);

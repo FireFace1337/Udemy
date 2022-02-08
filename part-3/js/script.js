@@ -129,7 +129,7 @@ window.addEventListener('scroll', showModalByScroll);
 // classes
 
 class Menu {
-    constructor (title, desctiption, price, img, alt, parrent) {
+    constructor (title, desctiption, price, img, alt, parrent, ...classes) {
         this.title = title;
         this.desctiption = desctiption;
         this.price = price;
@@ -138,6 +138,7 @@ class Menu {
         this.exchange = 75;
         this.parrent = document.querySelector(parrent);
         this.changeToRUB();
+        this.classes = classes;
     }
 
     changeToRUB() {
@@ -146,7 +147,12 @@ class Menu {
 
     render() {
         const element = document.createElement('div');
-        element.innerHTML = ` <div class="menu__item">
+        if (this.classes.length === 0) {
+            element.classList.add('menu__item');
+        } else {
+            this.classes.forEach(className => element.classList.add(className));
+        }
+        element.innerHTML = `
         <img src=${this.img} alt=${this.alt}>
         <h3 class="menu__item-subtitle">${this.title}"</h3>
         <div class="menu__item-descr">${this.desctiption}</div>
@@ -154,8 +160,7 @@ class Menu {
         <div class="menu__item-price">
             <div class="menu__item-cost">Цена:</div>
             <div class="menu__item-total"><span>${this.price}</span> руб/день</div>
-        </div>
-    </div>`; 
+        </div>`; 
 
     this.parrent.append(element);
     }

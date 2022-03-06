@@ -40,7 +40,7 @@ tabsParent.addEventListener('click', (event) => {
 // console.log(Date.parse(new Date ()));
 // console.log(new Date());
 
-const deadLine = '2022-02-09';
+const deadLine = '2022-04-01';
 
     function getTimeRemaining(endTime) {
         let total = Date.parse(endTime) - Date.parse(new Date ());
@@ -185,3 +185,55 @@ post.render();
 // 'Что тут описывать то?', 
 // 1000, null, 'suetaaaa', '.menu .container');
 // sueta.render();
+
+// forms 
+
+const forms = document.querySelectorAll('form');
+
+const message = {
+    success: 'Спасибо! Мы скоро с вами свяжемся!',
+    loading: 'Загрузка...',
+    fail: 'Произошла ошибка'
+};
+
+forms.forEach(item => {
+    postData(item);
+});
+
+function postData(form) {
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        let statusMessage = document.createElement('div');
+        statusMessage.classList.add('status');
+        statusMessage.textContent = message.loading;
+        form.appendChild(statusMessage);
+
+        const request = new XMLHttpRequest();
+        request.open('POST', 'server.php');
+        request.setRequestHeader('Content-type', 'application/json');
+        const formData = new FormData(form);
+
+        const object = {};
+        formData.forEach(function(value, key){
+            object[key] = value;
+        });
+
+        const json = JSON.stringify(object);
+
+        request.send(json);
+
+        request.addEventListener('load', () => {
+            if (request.status === 200) {
+                console.log(request.response);
+                statusMessage.textContent = message.success;
+                form.reset();
+                setTimeout(() => {
+                    statusMessage.remove();
+                }, 5000);
+            } else {
+                statusMessage.textContent = message.fail;
+            }
+        });
+    });
+}

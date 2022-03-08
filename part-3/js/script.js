@@ -230,9 +230,10 @@ function postData(form) {
 
         form.insertAdjacentElement('afterend', statusMessage);
 
-        const request = new XMLHttpRequest();
-        request.open('POST', 'server.php');
-        request.setRequestHeader('Content-type', 'application/json');
+        // const request = new XMLHttpRequest();
+        // request.open('POST', 'server.php');
+        
+        // request.setRequestHeader('Content-type', 'application/json');
         const formData = new FormData(form);
 
         const object = {};
@@ -240,20 +241,37 @@ function postData(form) {
             object[key] = value;
         });
 
-        const json = JSON.stringify(object);
+        // const json = JSON.stringify(object);
 
-        request.send(json);
-
-        request.addEventListener('load', () => {
-            if (request.status === 200) {
-                console.log(request.response);
-                showThanksModal(message.success);
-                form.reset();
-                statusMessage.remove();
-            } else {
-                showThanksModal(message.fail);
-            }
+        fetch('server.php', {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(object)
+        })
+        .then(data => data.text())
+        .then(data => {
+            console.log(data);
+            showThanksModal(message.success);
+            form.reset();
+            statusMessage.remove();
+        }).catch(() => {
+            showThanksModal(message.fail);
+        }).finally(() => {
+            form.reset();
         });
+
+        // request.addEventListener('load', () => {
+        //     if (request.status === 200) {
+        //         console.log(request.response);
+        //         showThanksModal(message.success);
+        //         form.reset();
+        //         statusMessage.remove();
+        //     } else {
+        //         showThanksModal(message.fail);
+        //     }
+        // });
     });
 }
 
@@ -279,3 +297,13 @@ function showThanksModal(message) {
         closeModal();
     }, 4000);
 }
+
+// fetch('https://jsonplaceholder.typicode.com/posts', {
+//     method: "POST",
+//     body: JSON.stringify({name: 'Alex'}),
+//     headers: {
+//         'Content-Type': 'application/json'
+//     }
+// })
+//   .then(response => response.json())
+//   .then(json => console.log(json));

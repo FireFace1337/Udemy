@@ -330,6 +330,19 @@ function showThanksModal(message) {
     const slidesWrapper = document.querySelector('.offer__slider-wrapper');
     const slidesField = document.querySelector('.offer__slider-inner');
     const width = window.getComputedStyle(slidesWrapper).width;
+
+    const addOpacity = function() {
+        dots.forEach(dot => dot.style.opacity = '.5');
+        dots[slideIndex - 1].style.opacity = 1;
+    };
+
+    const addZero = function() {
+        if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+        } else {
+            current.textContent = slideIndex;
+        }
+    };
     
     let slideIndex = 1;
     let offset = 0;
@@ -411,14 +424,9 @@ function showThanksModal(message) {
             slideIndex++;
         }
 
-        if (slides.length < 10) {
-            current.textContent = `0${slideIndex}`;
-        } else {
-            current.textContent = slideIndex;
-        }
+        addZero();
 
-        dots.forEach(dot => dot.style.opacity = '.5');
-        dots[slideIndex - 1].style.opacity = 1;
+        addOpacity();
     });
    
 
@@ -437,14 +445,9 @@ function showThanksModal(message) {
             slideIndex--;
         }
 
-        if (slides.length < 10) {
-            current.textContent = `0${slideIndex}`;
-        } else {
-            current.textContent = slideIndex;
-        }
+        addZero();
 
-        dots.forEach(dot => dot.style.opacity = '.5');
-        dots[slideIndex - 1].style.opacity = 1;
+        addOpacity();
 
     });
 
@@ -456,15 +459,14 @@ function showThanksModal(message) {
             offset = +width.slice(0, width.length - 2) * (slideTo - 1);
 
             slidesField.style.transform = `translateX(-${offset}px)`;
-            
+
             if (slides.length < 10) {
                 current.textContent = `0${slideIndex}`;
             } else {
                 current.textContent = slideIndex;
             }
     
-            dots.forEach(dot => dot.style.opacity = '.5');
-            dots[slideIndex - 1].style.opacity = 1;
+            addOpacity();
         });
     });
     // showSlides(slideIndex);

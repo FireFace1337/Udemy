@@ -21,11 +21,25 @@ class User {
             console.log('Недопустимое значение!');
         }
     }
+
+    get surname() {
+        return this.#surname;
+    }
+
+    set surname(surname) {
+        this.#surname = surname;
+    }
 }
 
 const dima = new User('Dima', 20);
-console.log(dima.age);
+// console.log(dima.age);
+// dima.age = 17;
+// console.log(dima.age);
+dima.say();
+console.log(dima.surname);
+dima.surname = 'Lavrov';
+console.log(dima.surname);
+dima.name = 'Maksim';
 dima.age = 17;
-console.log(dima.age);
 dima.say();
 

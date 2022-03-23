@@ -1,9 +1,9 @@
-function tabs() {
+function tabs(tabsSelector, tabsContentSelector, tabsParentSelector, activeClass) {
     // tabs
 
-    let tabs = document.querySelectorAll('.tabheader__item');
-    let tabsContent = document.querySelectorAll('.tabcontent');
-    let tabsParent = document.querySelector('.tabheader__items');
+    let tabs = document.querySelectorAll(tabsSelector);
+    let tabsContent = document.querySelectorAll(tabsContentSelector);
+    let tabsParent = document.querySelector(tabsParentSelector);
 
     function hideTabsContent() {
         tabsContent.forEach(item => {
@@ -12,21 +12,21 @@ function tabs() {
         });
 
         tabs.forEach(item => {
-            item.classList.remove('tabheader__item_active');
+            item.classList.remove(activeClass);
         });
     }
 
     function showTabsContent(i = 0) {
         tabsContent[i].classList.add('show', 'fade');
         tabsContent[i].classList.remove('hide');
-        tabs[i].classList.add('tabheader__item_active');
+        tabs[i].classList.add(activeClass);
     }
 
     hideTabsContent();
     showTabsContent();
 
     tabsParent.addEventListener('click', (event) => {
-        if (event.target.classList.contains('tabheader__item')) {
+        if (event.target.classList.contains(tabsSelector.slice(1))) {
             tabs.forEach((item, i) => {
                 if (item == event.target) {
                     hideTabsContent();
@@ -37,4 +37,4 @@ function tabs() {
     });
 }
 
-module.exports = tabs;
+export default tabs;

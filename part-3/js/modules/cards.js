@@ -1,3 +1,5 @@
+import {getResource} from '../services/services';
+
 function cards() {
     // classes
 
@@ -40,26 +42,17 @@ class MenuCard {
     }
 }
 
-const getResource = async (url) => {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-        throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-    }
-
-    return await res.json();
-};
-
 getResource('http://localhost:3000/menu')
     .then(data => {
         data.forEach(({title, descr, price, img, altimg}) => {
             new MenuCard(title, descr, price, img, altimg, '.menu .container').render();
         });
     });
+
 // const sueta = new Menu ('Меню "Sуета', 
 // 'Что тут описывать то?', 
 // 1000, null, 'suetaaaa', '.menu .container');
 // sueta.render();
 }
 
-module.exports = cards;
+export default cards;

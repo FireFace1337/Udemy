@@ -1,10 +1,9 @@
-function timer() {
+function timer(id, deadline) {
     // timer 
 
 // console.log(Date.parse(new Date ()));
 // console.log(new Date());
 
-const deadLine = '2022-04-01';
 
 function getTimeRemaining(endTime) {
     let total = Date.parse(endTime) - Date.parse(new Date ());
@@ -56,7 +55,7 @@ function setClock(selector, endTime) {
     }
 }
 
-setClock('.timer', deadLine);
+setClock(id, deadline);
 }
 
-module.exports = timer;
+export default timer;

@@ -1,7 +1,10 @@
-function forms() {
+import {closeModal, openModal} from './modal';
+import {postData} from '../services/services';
+
+function forms(formSelector, modalTimerId) {
     // forms 
 
-const forms = document.querySelectorAll('form');
+const forms = document.querySelectorAll(formSelector);
 
 const message = {
     success: 'Спасибо! Мы скоро с вами свяжемся!',
@@ -13,18 +16,6 @@ const message = {
 forms.forEach(item => {
     bindPostData(item);
 });
-
-const postData = async (url, data) => {
-    const res = await fetch(url, {
-        method: "POST",
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: data
-    });
-
-    return await res.json();
-};
 
 function bindPostData(form) {
     form.addEventListener('submit', (e) => {
@@ -79,7 +70,7 @@ function showThanksModal(message) {
     const prevModalDialog = document.querySelector('.modal__dialog');
 
     prevModalDialog.classList.add('hide');
-    openModal();
+    openModal('.modal', modalTimerId);
 
     const thanksModal = document.createElement('div');
     thanksModal.classList.add('modal__dialog');
@@ -94,7 +85,7 @@ function showThanksModal(message) {
         thanksModal.remove();
         prevModalDialog.classList.add('show');
         prevModalDialog.classList.add('hide');
-        closeModal();
+        closeModal('.modal');
     }, 4000);
 }
 
@@ -113,4 +104,4 @@ function showThanksModal(message) {
         .then(res => console.log(res));
 }
 
-module.exports = forms;
+export default forms;

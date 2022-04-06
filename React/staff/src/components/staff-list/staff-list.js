@@ -5,9 +5,10 @@ import './staff-list.css';
 const StaffList = ({data}) => {
 
     const elements = data.map(item => {
+        const {id, ...itemProps} = item;
         return (
             // <StaffListItem name={item.name} salary={item.salary} />
-            <StaffListItem {...item} />
+            <StaffListItem key={id} {...itemProps} />
         )
     })
 

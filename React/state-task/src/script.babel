@@ -1,49 +1,3 @@
-import {Component} from "react";
-
-
-import './App.css';
-
-class WhoAmI extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      years: 27,
-      text: 'Увеличить возраст'
-    }
-  }
-
-  nextYear = () => {
-    this.setState(state => ({
-      years: state.years + 1
-    }))
-  }
-
-
-  render() {
-    const {name, surname, link} = this.props;
-    return (
-      <div>
-        <h1>My name is {name}, surname - {surname}, age - {this.state.years} </h1>
-        <button onClick={this.nextYear}>{this.state.text}</button>
-        <br/>
-        <a href={link}>My profile</a>
-      </div>
-      )
-    }
-  }
-
-function App() {
-  return (
-    <div className="App">
-      <WhoAmI name="Max" surname="Lavrov" link="facebook.com"/>
-      <WhoAmI name="Andrey" surname="Bagrov" link="vk.com"/>
-    </div>
-  );
-}
-
-export default App;
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -69,7 +23,13 @@ class App extends React.Component {
   
   random = () => {
     this.setState(state => ({
-      counter: Math.floor(Math.random() * 50)
+      counter: 50 - Math.floor(Math.random() * 101)
+    }))
+  }
+
+  reset = () => {
+    this.setState(state => ({
+      counter: this.props.counter
     }))
   }
   
@@ -81,15 +41,15 @@ class App extends React.Component {
         <div class="controls">
           <button onClick={this.increment}>INC</button>
           <button onClick={this.decrement}>DEC</button>
-          <button>RND</button>
-          <button>RESET</button>
+          <button onClick={this.random}>RND</button>
+          <button onClick={this.reset}>RESET</button>
         </div>
       </div>
     )
   }
 }
 
-ReactDOM.render(<App counter={-48}/>, document.getElementById('app'));
+ReactDOM.render(<App counter={0}/>, document.getElementById('app'));
 
 // 1) Начальное значение счетчика должно передаваться через props 
 // 2) INC и DEC увеличивают и уменьшают счетчик соответственно на 1. Без ограничений, но можете добавить границу в -50/50. По достижению границы ничего не происходит

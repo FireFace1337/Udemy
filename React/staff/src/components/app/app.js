@@ -18,6 +18,7 @@ class App extends Component {
                 {name: 'Leonid Messi', salary: 15000, increase: true, id: 3}
             ]
         }
+        this.maxId = 4;
     }
 
     deleteItem = (id) => {
@@ -39,6 +40,31 @@ class App extends Component {
         })
     }
 
+    addItem = (name, salary) => {
+        const newItem = {
+            name, 
+            salary,
+            increase: false,
+            id: this.maxId++
+        }
+        this.setState(({data}) => {
+            const newArr = [...data, newItem];
+            return {
+                data: newArr
+            }
+        });
+    }
+
+    // valueSubmit = (e) => {
+    //     this.setState(({data}) => {
+    //         return {
+    //             data: data.concat([{name: e.name, salary: e.salary, increase: false, id: this.maxId++}]) 
+    //         }
+    //     })
+    // }
+
+
+
    render() {
     return (
         <div className="app">
@@ -53,7 +79,7 @@ class App extends Component {
             data={this.state.data}
             onDelete={this.deleteItem}
             />
-            <StaffAddForm/>
+            <StaffAddForm onAdd={this.addItem}/>
         </div>
     );
    }

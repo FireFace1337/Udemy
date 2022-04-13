@@ -2,25 +2,23 @@ import StaffListItem from "../staff-list-item/staff-list-item";
 
 import './staff-list.css';
 
-const StaffList = ({data, onDelete}) => {
+const StaffList = ({data, onDelete, onToggleLike, onToggleIncrease}) => {
 
     const elements = data.map(item => {
         const {id, ...itemProps} = item;
         return (
-            // <StaffListItem name={item.name} salary={item.salary} />
             <StaffListItem 
             key={id} 
             {...itemProps}
-            onDelete={() => onDelete(id)} />
+            onDelete={() => onDelete(id)}
+            onToggleIncrease={() => onToggleIncrease(id)}
+            onToggleLike={() => onToggleLike(id)} />
         )
     })
 
     return (
         <ul className="app-list list-group">
             {elements}
-            {/* <StaffListItem name="Max Lavrov" salary={800}/>
-            <StaffListItem name="Alex Ronaldo" salary={3000}/>
-            <StaffListItem name="Leonid Messi" salary={5000}/> */}
         </ul>
     )
 }

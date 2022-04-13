@@ -13,9 +13,9 @@ class App extends Component {
         super(props);
         this.state = {
             data: [
-                {name: 'Max Lavrov', salary: 800, increase: true, id: 1},
-                {name: 'Alex Ronaldo', salary: 3000, increase: false, id: 2},
-                {name: 'Leonid Messi', salary: 15000, increase: true, id: 3}
+                {name: 'Max Lavrov', salary: 800, increase: true, like: true, id: 1},
+                {name: 'Alex Ronaldo', salary: 3000, increase: false, like: false, id: 2},
+                {name: 'Leonid Messi', salary: 15000, increase: true, like: false, id: 3}
             ]
         }
         this.maxId = 4;
@@ -23,17 +23,6 @@ class App extends Component {
 
     deleteItem = (id) => {
         this.setState(({data}) => {
-            // const index = data.findIndex(elem => elem.id === id);
-            
-            // const before = data.slice(0, index);
-            // const after = data.slice(index + 1);
-
-            // const newArr = [...before, ...after];
-
-            // return {
-            //     data: newArr
-            // }
-
             return {
                 data: data.filter(item => item.id !== id)
             }
@@ -45,6 +34,7 @@ class App extends Component {
             name, 
             salary,
             increase: false,
+            like: false,
             id: this.maxId++
         }
         this.setState(({data}) => {
@@ -55,14 +45,31 @@ class App extends Component {
         });
     }
 
-    // valueSubmit = (e) => {
-    //     this.setState(({data}) => {
-    //         return {
-    //             data: data.concat([{name: e.name, salary: e.salary, increase: false, id: this.maxId++}]) 
-    //         }
-    //     })
-    // }
+    onToggleIncrease = (id) => {
+        // this.setState(({data}) => {
+        //     // const index = data.findIndex(elem => elem.id === id); 
 
+        //     // const old = data[index];
+        //     // const newItem = {...old, increase: !old.increase};
+        //     // const newArr = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+
+        //     // return {
+        //     //     data: newArr
+        //     // }
+        // })
+        this.setState(({data}) => ({
+            data: data.map(item => {
+                if (item.id === id) {
+                    return {...item, increase: !item.increase}
+                }
+                return item;
+            })
+        }))
+    }
+
+    onToggleLike = (id) => {
+        console.log(`Like this ${id}`);
+    }
 
 
    render() {
@@ -78,6 +85,8 @@ class App extends Component {
             <StaffList 
             data={this.state.data}
             onDelete={this.deleteItem}
+            onToggleIncrease={this.onToggleIncrease}
+            onToggleLike={this.onToggleLike}
             />
             <StaffAddForm onAdd={this.addItem}/>
         </div>

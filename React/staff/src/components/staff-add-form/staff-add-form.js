@@ -36,13 +36,15 @@ class StaffAddForm extends Component {
                 <form 
                     className="add-form d-flex"
                     onSubmit = {this.onSubmit}>
-                    <input type="text"
+                    <input type="text" 
+                            required
                             className="form-control new-post-label"
                             placeholder="Как его зовут?"
                             name='name'
                             value={name}
                             onChange={this.onValueChange}/>
-                    <input type="number"
+                    <input type="number" 
+                            required
                             className="form-control new-post-label"
                             placeholder="З/П в $?" 
                             name='salary'

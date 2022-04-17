@@ -15,7 +15,9 @@ const StaffListItem = (props) => {
     }
 
     return <li className={increaseClass}>
-            <span className="list-group-item-label" onClick={onToggleLike}>{name}</span>
+            <span className="list-group-item-label" onClick={onToggleLike}
+            // style={{fontSize: 40, color: 'red'}}
+            >{name}</span>
             <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button type="button"

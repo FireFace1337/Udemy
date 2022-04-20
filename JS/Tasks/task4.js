@@ -5,7 +5,8 @@ function firstTask() {
     for (let i = 0; i < arr.length; i++) {
         result[i] = arr[i];
     }
-    // Не трогаем
+
+    console.log(result);
     return result;
 }
 
@@ -19,11 +20,12 @@ function secondTask() {
     for (let i = 0; i < data.length; i++) {
         if (typeof(data[i]) === 'number') {
             data[i] = data[i] * 2;
-        } else {
-            data[i] = data[i] + ' - done';
+        } else if (typeof(data[i] === 'string')) {
+            data[i] = data[i] + ' - done'; // data[i] = `${data[i]} - done`;
         }
     }
-    // Не трогаем
+
+    console.log(data);
     return data;
 }
 
@@ -39,7 +41,8 @@ function thirdTask() {
     for (let i = 0; i < data.length; i++) {
         result[i] = data[data.length - 1 - i]
     }  
-    // Не трогаем
+    
+    console.log(result);
     return result;
 }
 

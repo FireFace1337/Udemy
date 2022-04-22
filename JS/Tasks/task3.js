@@ -10,9 +10,10 @@ firstTask();
 // Место для второй задачи
 function secondTask() {
     for (let i = 20; i > 9; i--) {
-        console.log(i);
         if (i === 13) {
             break;
+        } else {
+            console.log(i);
         }
     }
 }

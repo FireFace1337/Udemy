@@ -14142,34 +14142,33 @@ console.log(1);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 const modals = () => {
-  function bindModal(trigger, modal, close) {
-    trigger.addEventListener('click', e => {
-      if (e.target) {
-        e.preventDefault();
-      }
+  function bindModal(triggerSelector, modalSelector, closeSelector) {
+    const trigger = document.querySelectorAll(triggerSelector);
+    const modal = document.querySelector(modalSelector);
+    const close = document.querySelector(closeSelector);
+    trigger.forEach(item => {
+      item.addEventListener('click', e => {
+        if (e.target) {
+          e.preventDefault();
+        }
 
-      modal.style.display = "block"; // document.body.style.overflow = "hidden";
-
-      document.body.classList.add('modal-open');
+        modal.style.display = "block";
+        document.body.style.overflow = "hidden"; // document.body.classList.add('modal-open');
+      });
     });
     close.addEventListener('click', () => {
-      modal.style.display = "none"; // document.body.style.overflow = "";
-
-      document.body.classList.remove('modal-open');
+      modal.style.display = "none";
+      document.body.style.overflow = ""; // document.body.classList.remove('modal-open');
     });
     modal.addEventListener('click', e => {
       if (e.target === modal) {
-        modal.style.display = "none"; // document.body.style.overflow = "";
-
-        document.body.classList.remove('modal-open');
+        modal.style.display = "none";
+        document.body.style.overflow = ""; // document.body.classList.remove('modal-open');
       }
     });
   }
 
-  const callEngineerBtn = document.querySelector('.popup_engineer_btn');
-  const modalEngineer = document.querySelector('.popup_engineer');
-  const modalEngineerClose = document.querySelector('.popup_engineer .popup_close');
-  bindModal(callEngineerBtn, modalEngineer, modalEngineerClose);
+  bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);

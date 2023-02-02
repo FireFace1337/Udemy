@@ -14169,6 +14169,7 @@ const modals = () => {
   }
 
   bindModal('.popup_engineer_btn', '.popup_engineer', '.popup_engineer .popup_close');
+  bindModal('.phone_link', '.popup', '.popup .popup_close');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);

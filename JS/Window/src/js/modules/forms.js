@@ -1,6 +1,14 @@
 const forms = () => {
     const form = document.querySelectorAll('form');
     const inputs = document.querySelectorAll('input');
+    const phoneInputs = document.querySelectorAll('input[name="user_phone"');
+
+    phoneInputs.forEach(item => {
+        item.addEventListener('input', () => {
+            item.value = item.value.replace(/\D/, '');
+        });
+    })
+
     const message = {
         loading: 'Загрузка...',
         success: 'Спасибо! Скоро мы с вами свяжиемся.',
@@ -45,8 +53,6 @@ const forms = () => {
                         statusMessage.remove();
                     }, 5000);
                 });
-
-
         });
     });
 };

@@ -10,7 +10,7 @@ const changeModalState = (state) => {
     checkNumInputs('#width');
     checkNumInputs('#height');
 
-    function bindActionToElems(event, elem, prop) {
+    function bindActionToElems (event, elem, prop) {
         elem.forEach((item, i) => {
             item.addEventListener(event, () => {
                 switch(item.nodeName) {
@@ -25,7 +25,7 @@ const changeModalState = (state) => {
                                 if (i == j) {
                                     box.checked = true;
                                 }
-                            })
+                            });
                         } else {
                             state[prop] = item.value;
                         }
@@ -36,7 +36,7 @@ const changeModalState = (state) => {
                 }
 
                 console.log(state);
-            })
+            });
         });
     }
 
